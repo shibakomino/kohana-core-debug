@@ -22,3 +22,17 @@ if (extension_loaded('xdebug')) {
         }
     }
 */
+
+/*kohana exception
+  public static function text(Exception $e)
+  {
+
+    if(class_exists("Debug")){
+      return sprintf('%s [ %s ]: %s ~ %s [ %d ]',
+        get_class($e), $e->getCode(), strip_tags($e->getMessage()), Debug::path($e->getFile()), $e->getLine());
+    }
+
+    return sprintf('%s [ %s ]: %s ~ %s [ %d ]',
+      get_class($e), $e->getCode(), strip_tags($e->getMessage()), $e->getFile(), $e->getLine());
+  }
+*/
