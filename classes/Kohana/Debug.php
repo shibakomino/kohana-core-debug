@@ -1,4 +1,8 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
+namespace Kohana;
+
+use \UTF8 as UTF8;
+
 /**
  * Contains debugging and dumping tools.
  *
@@ -8,7 +12,7 @@
  * @copyright  (c) 2008-2014 Kohana Team
  * @license    http://kohanaframework.org/license
  */
-class Kohana_Debug {
+class Debug {
 
 	/**
 	 * Returns an HTML string of debugging information about any number of
@@ -31,7 +35,7 @@ class Kohana_Debug {
 		$output = array();
 		foreach ($variables as $var)
 		{
-			$output[] = Debug::_dump($var, 1024);
+			$output[] = static::_dump($var, 1024);
 		}
 
 		return '<pre class="debug">'.implode("\n", $output).'</pre>';
@@ -49,7 +53,7 @@ class Kohana_Debug {
 	 */
 	public static function dump($value, $length = 128, $level_recursion = 10)
 	{
-		return Debug::_dump($value, $length, $level_recursion);
+		return static::_dump($value, $length, $level_recursion);
 	}
 
 	/**
@@ -90,7 +94,7 @@ class Kohana_Debug {
 						// Only exists on PHP >= 5.2.4
 						if (stream_is_local($file))
 						{
-							$file = Debug::path($file);
+							$file = static::path($file);
 						}
 					}
 
@@ -158,7 +162,7 @@ class Kohana_Debug {
 						$key = '"'.htmlspecialchars($key, ENT_NOQUOTES).'"';
 					}
 
-					$output[] = "$space$s$key => ".Debug::_dump($val, $length, $limit, $level + 1);
+					$output[] = "$space$s$key => ".static::_dump($val, $length, $limit, $level + 1);
 				}
 				unset($var[$marker]);
 
@@ -215,7 +219,7 @@ class Kohana_Debug {
 						$access = '<small>public</small>';
 					}
 
-					$output[] = "$space$s$access $key => ".Debug::_dump($val, $length, $limit, $level + 1);
+					$output[] = "$space$s$access $key => ".static::_dump($val, $length, $limit, $level + 1);
 				}
 				unset($objects[$hash]);
 
@@ -367,7 +371,7 @@ class Kohana_Debug {
 			if (isset($step['file']) AND isset($step['line']))
 			{
 				// Include the source of this step
-				$source = Debug::source($step['file'], $step['line']);
+				$source = static::source($step['file'], $step['line']);
 			}
 
 			if (isset($step['file']))
