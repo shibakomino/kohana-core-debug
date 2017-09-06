@@ -3,6 +3,7 @@
 namespace Kohana;
 
 use \UTF8 as UTF8;
+use \Text as Text;
 use \ReflectionMethod as ReflectionMethod;
 use \ReflectionFunction as ReflectionFunction;
 
@@ -210,19 +211,7 @@ class Debug
      */
     public static function path($file)
     {
-        if (strpos($file, APPPATH) === 0) {
-            $file = 'APPPATH' . '/' . substr($file, strlen(APPPATH));
-        } elseif (strpos($file, SYSPATH) === 0) {
-            $file = 'SYSPATH' . '/' . substr($file, strlen(SYSPATH));
-        } elseif (strpos($file, MODPATH) === 0) {
-            $file = 'MODPATH' . '/' . substr($file, strlen(MODPATH));
-        } elseif (strpos($file, DOCROOT) === 0) {
-            $file = 'DOCROOT' . '/' . substr($file, strlen(DOCROOT));
-        } elseif (strpos($file, DEV_MODPATH) === 0) {
-            $file = 'DEV_MODPATH' . '/' . substr($file, strlen(DEV_MODPATH));
-        }
-
-        return $file;
+        return Text::file_path($file);
     }
 
     /**
